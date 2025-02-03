@@ -5,9 +5,11 @@ import Bestsellers from '../components/bestsellers'
 import Ourpolicy from '../components/ourpolicy'
 import Newletter from '../components/newletter'
 
+
 const Home = () => {
   return (
     <div>
+    
       <Header/>
       <Latestcollection/>
       <Bestsellers/>

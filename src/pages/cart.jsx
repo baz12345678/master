@@ -4,48 +4,39 @@ import Title from '../components/title';
 import { assets } from '../assets/assets';
 import Carttotal from '../components/carttotal';
 
-
-
 const Cart = () => {
-
-
-  const { products, currency, cartItems ,updateQuantity, navigate } = useContext(ShopContext);
+  const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
-
-
 
   useEffect(() => {
     const tempData = [];
-    // Loop through cartItems and create tempData array with proper structure
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
+    
+    for (const productId in cartItems) {
+      for (const size in cartItems[productId]) {
+        const item = cartItems[productId][size];
+        if (item.quantity > 0) {
           tempData.push({
-            _id: items,
-            size: item,
-            quantity: cartItems[items][item], // Correct quantity access
+            _id: productId,
+            size: size,
+            color: item.color || '#000000', 
+            quantity: item.quantity,
           });
         }
       }
     }
-    setCartData(tempData); // Update the state with formatted cart data
+    setCartData(tempData); 
   }, [cartItems]);
 
-  // const handleQuantityChange = (e, itemId, size) => {
-  //   // Update the quantity of a specific item in the cart
-  //   const updatedCartItems = { ...cartItems };
-  //   updatedCartItems[itemId][size] = parseInt(e.target.value, 10);
-  //  // Update the cartItems in context (make sure this works)
-  // };
-
   return (
-    <div className="border-t pt-14">
-      <div className=" mb-3 md:text-2xl sm:text-xl">
+    <div className="border-t pt-14 px-10 sm:px-[3vw] md:px-[3vw] lg:px-[3vw] ">
+      <div className="mb-3 md:text-2xl sm:text-xl">
         <Title text1={'YOURS'} text2={'CART'} />
       </div>
       <div>
         {cartData.map((item, index) => {
           const productData = products.find((product) => product._id === item._id);
+
+          if (!productData) return null;
 
           return (
             <div
@@ -59,25 +50,47 @@ const Cart = () => {
                   <div className="flex items-center gap-5 mt-5 text-sm">
                     <p>{currency}{productData.price}</p>
                     <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">{item.size}</p>
+                    
+                    <div className="flex items-center gap-2">
+                      <p>Color:</p>
+                      <div
+                        style={{ backgroundColor: item.color || '#000000' }} // Use the selected color
+                        className="w-4 h-4 rounded-full border border-gray-300"
+                      ></div>
+                    </div>
                   </div>
                 </div>
               </div>
-              {/* Controlled input for quantity */}
+              
               <input
-                className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"  type="number"   min={1} value={item.quantity} onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id,item.size,Number(e.target.value))}   />
-                <img onClick={()=>updateQuantity(item._id,item.size,0)} className='w-4 sm:w-4 cursor-pointer' src={assets.bin_icon} alt="" />
+                className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"
+                type="number"
+                min={1}
+                value={item.quantity}
+                onChange={(e) =>
+                  e.target.value === '' || e.target.value === '0'
+                    ? null
+                    : updateQuantity(item._id, item.size, item.color, Number(e.target.value))
+                }
+              />
+              
+              <img  onClick={() => updateQuantity(item._id, item.size, item.color, 0)} className="w-4  cursor-pointer"  src={assets.bin_icon}    />
             </div>
           );
         })}
       </div>
-      <div className='flex justify-end my-20'>
-        <div className='w-full sm:w-[400px]'>
-          <Carttotal/>
-          <div className='w-full text-end'>
-            <button onClick={()=>navigate('/placeorder')} className='bg-black text-white text-sm my-8 px-8 py-3 active:bg-orange-500'>PROCEED TO CHECKOUT</button>
+      <div className="flex justify-end my-20">
+        <div className="w-full sm:w-[400px]">
+          <Carttotal />
+          <div className="w-full text-end">
+            <button
+              onClick={() => navigate('/placeorder')}
+              className="bg-black text-white text-sm my-8 px-8 py-3 active:bg-orange-500"
+            >
+              PROCEED TO CHECKOUT
+            </button>
           </div>
         </div>
-
       </div>
     </div>
   );

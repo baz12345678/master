@@ -9,7 +9,7 @@ const Placeorder = () => {
   const  [method,setMethod] = useState('cod');
   const {navigate} = useContext(ShopContext)
   return (
-    <div className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[70vh] border-t '>
+    <div className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[70vh] border-t px-4 sm:px-[2vw] md:px-[3vw] lg:px-[3vw] '>
 
   {/* left */}
 

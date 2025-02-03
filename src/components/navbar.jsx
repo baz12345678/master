@@ -9,11 +9,15 @@ const Navbar = () => {
 
 
     return (
-        <div className='flex items-center justify-between py-2 font-medium'>
-            <img src={assets.logo} className='w-14 ' alt="" />
-            <ul className='hidden sm:flex gap-4 text-sm text-gray-600 '>
+        <div className='flex  items-center py-2 font-medium px-5 justify-between sm:justify-between md:justify-between  lg:justify-normal xl:justify-normal '>
 
-                <NavLink to='/' className='flex flex-col  items-center gap-1 '>
+
+            <img src={assets.logo} className='w-14 mx-0   md:mx-auto lg:mx-auto' alt="" />
+
+
+            <ul className='hidden md:flex gap-4 text-base text-gray-600 absolute '>
+
+                <NavLink to='/' className='flex flex-col  items-center gap-1.5 '>
                     <p>Home</p>
                     <hr className='w-3/4 border-none h-[2px] bg-gray-700 hidden' />
                 </NavLink>
@@ -30,6 +34,14 @@ const Navbar = () => {
                     <hr className='w-3/4 border-none h-[2px] bg-gray-700 hidden' />
                 </NavLink>
             </ul>
+
+          {/* <div className='flex items-center gap-4'>
+          
+            <button onClick={()=>setIsDarkMode(prev => !prev)}>
+                <Image src={isDarkMode ? assets.sun : assets} alt='' className='w-6'/>
+            </button>
+          </div>  */}
+
 
             <div className='flex items-center gap-4'>
                  <img onClick={()=>setShowSearch(true)} src={assets.search_icon} className='w-4 cursor-pointer' alt="" /> 
@@ -49,9 +61,9 @@ const Navbar = () => {
                 </Link>
                 <img onClick={()=>setVisible(true)} src={assets.menu_icon} className='w-6 bg-gray-200 p-1 rounded-md text-white cursor-pointer sm:hidden' alt="" />
             </div>
-            {/* sidebar for small screen */}
+            
 
-            <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full':'w-0'} `}>
+            <div className={`absolute top-10 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full':'w-0'} `}>
             <div className='flex flex-col text-gray-600'>
                 <div onClick={()=>setVisible(false)} className='flex items-center gap-4 p-3'>
                     <img className='h-4 rotate-180' src={assets.dropdown_icon} alt="" />

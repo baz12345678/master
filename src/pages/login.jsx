@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 const Login = () => {
-  const [state, setState] = useState('Sign Up'); // Toggle between 'Sign Up' and 'Login'
+  const [state, setState] = useState('Sign Up'); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [error, setError] = useState(''); // For showing error messages
-  const [loading, setLoading] = useState(false); // For disabling the button while submitting
+  const [error, setError] = useState(''); 
+  const [loading, setLoading] = useState(false); 
 
-  // Form validation
+
   const validateForm = () => {
     if (!email || !password) {
       setError('Please fill in all fields.');
@@ -34,23 +34,23 @@ const Login = () => {
     return true;
   }
 
-  // Handle form submission (Login or SignUp)
+  
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
     if (!validateForm()) return;
 
-    setLoading(true); // Set loading to true while awaiting API response
+    setLoading(true);
 
     const formData = { email, password, ...(state === 'Sign Up' && { name }) };
 
     try {
-      // Simulating an API request for login or signup
+      
       const response = await fakeApiCall(formData);
 
       if (response.success) {
         alert(state === 'Sign Up' ? 'Account created successfully!' : 'Logged in successfully!');
-        // You can store the authentication token in localStorage or redirect the user to another page
+        
       } else {
         setError(response.message || 'Something went wrong. Please try again.');
       }
@@ -61,47 +61,46 @@ const Login = () => {
     setLoading(false);
   }
 
-  // Simulated API call to demonstrate behavior (replace with actual API endpoint)
+  
   const fakeApiCall = async (formData) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (state === 'Sign Up') {
-          // Simulating email check on sign-up
+          
           if (formData.email === 'test@user.com') {
             resolve({ success: false, message: 'Email is already registered.' });
           } else {
-            resolve({ success: true }); // Simulate successful sign-up
+            resolve({ success: true }); 
           }
         } else if (state === 'Login') {
-          // Simulating login
+          
           if (formData.email !== 'test@user.com') {
             resolve({ success: false, message: 'Email is not registered.' });
           } else if (formData.password !== 'password123') {
             resolve({ success: false, message: 'Incorrect password.' });
           } else {
-            resolve({ success: true }); // Simulate successful login
+            resolve({ success: true }); 
           }
         }
-      }, 1500); // Simulate network delay
+      }, 1500); 
     });
   }
 
   return (
-    <form className="min-h-[60vh] flex items-center">
-      <div className="flex flex-col gap-3 m-auto p-6 min-w-[400px]  rounded-xl text-zinc-600 text-sm">
-        <p className="text-3xl pb-4 font-semibold text-center">
+    <form className="min-h-[60vh] flex items-center pt-4 sm:pt-10 md:pt-8 lg:pt-10 ">
+      <div className="flex flex-col gap-3 m-auto p-6 min-w-[250px] sm:min-w-[330px] md:min-w-[390px] lg:min-w-[420px]  rounded-xl text-zinc-600 text-sm shadow-md shadow-indigo-800">
+        <p className="text-2xl sm:lg:text-2xl md:text-3xl lg:text-3xl pb-4 font-semibold text-center">
           {state === 'Sign Up' ? 'Create Account' : 'Login'}
         </p>
 
-        {/* Error Message */}
+      
         {error && <p className="text-red-500 text-center">{error}</p>}
 
-        {/* Sign Up Form (Only visible when Sign Up is selected) */}
         {state === 'Sign Up' && (
           <div className="w-full">
             <p>Full Name</p>
             <input
-              className="border-b border-t border-zinc-300 rounded w-full p-1 mt-1"
+              className="border-b border border-zinc-700 rounded w-full p-1 mt-1"
               type="text"
               onChange={(e) => setName(e.target.value)}
               value={name}
@@ -109,38 +108,38 @@ const Login = () => {
           </div>
         )}
 
-        {/* Email Input */}
+      
         <div className="w-full">
           <p>Email</p>
           <input
-            className="border-b border-t border-zinc-300 rounded w-full p-1 mt-1"
+            className="border-b border border-zinc-700 rounded w-full p-1 mt-1"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
         </div>
 
-        {/* Password Input */}
+  
         <div className="w-full">
           <p>Password</p>
           <input
-            className="border-b border-t border-zinc-300 rounded w-full p-1 mt-1"
+            className="border-b border border-zinc-700 rounded w-full p-1 mt-1"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
         </div>
 
-        {/* Submit Button */}
+      
         <button
-          className="bg-black text-white text-lg py-3 px-8 rounded-md font-medium hidden md:block w-full mt-5 active:bg-orange-500"
+          className="bg-black text-white text-lg py-3 px-8 rounded-md font-medium  md:block w-full mt-5 active:bg-orange-500"
           onClick={onSubmitHandler}
           disabled={loading}
         >
           {loading ? 'Submitting...' : state === 'Sign Up' ? 'Create Account' : 'Login'}
         </button>
 
-        {/* Toggle between Login/SignUp */}
+        
         {state === 'Sign Up' ? (
           <p className="text-lg">
             Already have an account?{' '}

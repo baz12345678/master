@@ -5,8 +5,8 @@ import Newletter from '../components/newletter'
 
 const About = () => {
   return (
-    <div>
-      <div className='text-2xl text-center pt-8 border-t'>
+    <div className='px-4 sm:px-[2vw] md:px-[3vw] lg:px-[3vw] xl:px-[4vw]'>
+      <div className='text-2xl text-center pt-8 border-t px-4 sm:px-[2vw] md:px-[3vw] lg:px-[3vw] xl:px-[4vw]'>
         <Title text1={'ABOUT'} text2={'US'}/>
       </div>
 

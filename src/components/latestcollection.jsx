@@ -15,7 +15,7 @@ setLatestProducts(products.slice(0,10));
     },[])
   
   return (
-    <div className='my-10'>
+    <div className='my-10 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
         <div className='text-center py-8 text-2xl'>
       <Title text1={'LATEST'}  text2={'COLLECTIONS'}/>
      <p className='w-3/4 m-auto text-sm sm:text-sm md:text-sm text-gray-600'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis fuga architecto ullam assumenda.</p> 

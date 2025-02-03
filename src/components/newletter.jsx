@@ -6,7 +6,7 @@ const Newletter = () => {
         event.preventDefault();
     }
   return (
-    <div className='text-center'>
+    <div className='text-center  px-4 sm:px-[2vw] md:px-[3vw] lg:px-[3vw]'>
         <p className=' prata-regular text-2xl font-medium text-gray-800'> Subscribe now to get latest news </p>
     <p className='text-gray-400 mt-3'>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero doloribus cum numquam.
